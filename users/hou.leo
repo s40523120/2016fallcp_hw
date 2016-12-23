@@ -25,14 +25,14 @@
 <v t="amd.20161004083800.5" a="E"><vh>body</vh>
 <v t="amd.20161004083800.6" a="E"><vh>reveal div</vh>
 <v t="amd.20161004083800.7" a="E"><vh>slides div</vh>
-<v t="amd.20161004095719.1"><vh>封面投影片</vh>
+<v t="amd.20161004095719.1" a="E"><vh>封面投影片</vh>
 <v t="amd.20161004095719.2"><vh>封面投影片內容</vh></v>
 </v>
 <v t="yen.20161016023122.1"><vh>快捷鍵</vh>
 <v t="yen.20161016023122.2"><vh>投影片快捷鍵</vh></v>
 </v>
 <v t="amd.20161004104820.1" a="E"><vh>簡報</vh>
-<v t="amd.20161004104641.1"><vh>視頻</vh>
+<v t="amd.20161004104641.1" a="E"><vh>視頻</vh>
 <v t="amd.20161004104641.2"><vh>vimeo影片</vh></v>
 </v>
 <v t="yen.20161011155543.1" a="E"><vh>主題教學內容</vh>
@@ -65,7 +65,7 @@
 <v t="yen.20161016012922.1"><vh>下載可攜程式環境</vh></v>
 </v>
 </v>
-<v t="yen.20161011122932.1"><vh>自學力訓練</vh>
+<v t="yen.20161011122932.1" a="E"><vh>自學力訓練</vh>
 <v t="yen.20161011122601.1" a="E"><vh>自學的材料</vh>
 <v t="yen.20161011122601.2"><vh>自學 Python3</vh></v>
 </v>
@@ -314,7 +314,9 @@ print("hello")
 
 ### 虎科大機械設計工程系
 
+&lt;embed src="https://github.com/s40523120/2016fallcp_hw/KangHui_Sadhotel.mp3" autostart=true hidden=true loop=true&gt;
 &lt;small&gt;
+
 Created by &lt;a href="https://github.com/s40523120"&gt;Hou Andiao&lt;/a&gt; / &lt;a href="https://www.facebook.com/profile.php?id=100002576282298"&gt;@facebook&lt;/a&gt;
 &lt;/small&gt;
 
@@ -810,14 +812,14 @@ Brython (Javascript): https://www.brython.info/
 
 						
 </t>
-<t tx="yen.20161011155543.2"># 計算機程式在教什麼?
+<t tx="yen.20161011155543.2">
 
-## &lt;span style="color:#FFFF00"&gt;創造力&lt;/span&gt;&lt;small&gt;=自學力+程式力+想像力&lt;/small&gt;
-## &lt;span style="color:#FFFF00"&gt;表達力&lt;/span&gt;&lt;small&gt;=口語+文字+2D+3D+理論+實體&lt;/small&gt;
-&lt;span style="color:#00FF80"&gt;以及&lt;/span&gt;
-## &lt;span style="color:#FFFF00"&gt;協同力&lt;/span&gt;&lt;small&gt;=電腦+網路+工具+專案&lt;/small&gt;
+&lt;section&gt;
 
-</t>
+&lt;iframe src="https://player.vimeo.com/video/196824603" width="640" height="360" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen&gt;&lt;/iframe&gt;
+&lt;p&gt;&lt;a href="https://vimeo.com/196824603"&gt;20161221 194121&lt;/a&gt; from &lt;a href="https://vimeo.com/user57833023"&gt;Andiao Hou&lt;/a&gt; on &lt;a href="https://vimeo.com"&gt;Vimeo&lt;/a&gt;.&lt;/p&gt;
+
+&lt;/section&gt;</t>
 <t tx="yen.20161016004633.1">&lt;section&gt;
 @others
 &lt;/section&gt;
@@ -1032,14 +1034,14 @@ import http.server, ssl
 def domake():
     # build directory
     os.chdir("./../")
-    server_address = ('localhost', 5443)
+    server_address = ('192.168.1.6', 9443)
     httpd = http.server.HTTPServer(server_address, http.server.SimpleHTTPRequestHandler)
     httpd.socket = ssl.wrap_socket(httpd.socket,
                                    server_side=True,
                                    certfile='localhost.crt',
                                    keyfile='localhost.key',
                                    ssl_version=ssl.PROTOCOL_TLSv1)
-    print("5443 https server started")
+    print("9443 https server started")
     httpd.serve_forever()
 
 # 利用執行緒執行 https 伺服器
