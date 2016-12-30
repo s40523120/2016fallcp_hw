@@ -1,410 +1,577 @@
-<!DOCTYPE html>
-<html lang="en"
->
+<!doctype html>
+<html lang="en">
 <head>
-    <title>2016Fall 計算機程式課程網誌 (虎尾科大MDE)</title>
-    <!-- Using the latest rendering mode for IE -->
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>    
+2016 Fall 計算機程式課程
+</title>
+    <meta name="description" content="A framework for easily creating beautiful presentations using HTML">
+    <meta name="author" content="Hakim El Hattab">
+    
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    
+    <link rel="stylesheet" href="https://cad-lab.github.io/cadlab_data/reveal/css/reveal.css">
+    <link rel="stylesheet" href="https://cad-lab.github.io/cadlab_data/reveal/css/theme/black.css" id="theme">
+    
+    <!-- Theme used for syntax highlighting of code -->
+    <link rel="stylesheet" href="https://cad-lab.github.io/cadlab_data/reveal/lib/css/zenburn.css">
 
+    <!-- Printing and PDF exports -->
+    <script>
+        var link = document.createElement( 'link' );
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = window.location.search.match( /print-pdf/gi ) ? 'https://cad-lab.github.io/cadlab_data/reveal/css/print/pdf.css' : 'https://cad-lab.github.io/cadlab_data/reveal/css/print/paper.css';
+        document.getElementsByTagName( 'head' )[0].appendChild( link );
+    </script>
 
-
-
-<style type="text/css">
-
-/*some stuff for output/input prompts*/
-div.cell{border:1px solid transparent;display:-webkit-box;-webkit-box-orient:vertical;-webkit-box-align:stretch;display:-moz-box;-moz-box-orient:vertical;-moz-box-align:stretch;display:box;box-orient:vertical;box-align:stretch;display:flex;flex-direction:column;align-items:stretch}div.cell.selected{border-radius:4px;border:thin #ababab solid}
-div.cell.edit_mode{border-radius:4px;border:thin #008000 solid}
-div.cell{width:100%;padding:5px 5px 5px 0;margin:0;outline:none}
-div.prompt{min-width:11ex;padding:.4em;margin:0;font-family:monospace;text-align:right;line-height:1.21429em}
-@media (max-width:480px){div.prompt{text-align:left}}div.inner_cell{display:-webkit-box;-webkit-box-orient:vertical;-webkit-box-align:stretch;display:-moz-box;-moz-box-orient:vertical;-moz-box-align:stretch;display:box;box-orient:vertical;box-align:stretch;display:flex;flex-direction:column;align-items:stretch;-webkit-box-flex:1;-moz-box-flex:1;box-flex:1;flex:1}
-div.input_area{border:1px solid #cfcfcf;border-radius:4px;background:#f7f7f7;line-height:1.21429em}
-div.prompt:empty{padding-top:0;padding-bottom:0}
-div.input{page-break-inside:avoid;display:-webkit-box;-webkit-box-orient:horizontal;-webkit-box-align:stretch;display:-moz-box;-moz-box-orient:horizontal;-moz-box-align:stretch;display:box;box-orient:horizontal;box-align:stretch;}
-div.inner_cell{width:90%;}
-div.input_area{border:1px solid #cfcfcf;border-radius:4px;background:#f7f7f7;}
-div.input_prompt{color:navy;border-top:1px solid transparent;}
-div.output_wrapper{margin-top:5px;position:relative;display:-webkit-box;-webkit-box-orient:vertical;-webkit-box-align:stretch;display:-moz-box;-moz-box-orient:vertical;-moz-box-align:stretch;display:box;box-orient:vertical;box-align:stretch;width:100%;}
-div.output_scroll{height:24em;width:100%;overflow:auto;border-radius:4px;-webkit-box-shadow:inset 0 2px 8px rgba(0, 0, 0, 0.8);-moz-box-shadow:inset 0 2px 8px rgba(0, 0, 0, 0.8);box-shadow:inset 0 2px 8px rgba(0, 0, 0, 0.8);}
-div.output_collapsed{margin:0px;padding:0px;display:-webkit-box;-webkit-box-orient:vertical;-webkit-box-align:stretch;display:-moz-box;-moz-box-orient:vertical;-moz-box-align:stretch;display:box;box-orient:vertical;box-align:stretch;width:100%;}
-div.out_prompt_overlay{height:100%;padding:0px 0.4em;position:absolute;border-radius:4px;}
-div.out_prompt_overlay:hover{-webkit-box-shadow:inset 0 0 1px #000000;-moz-box-shadow:inset 0 0 1px #000000;box-shadow:inset 0 0 1px #000000;background:rgba(240, 240, 240, 0.5);}
-div.output_prompt{color:darkred;}
-
-a.anchor-link:link{text-decoration:none;padding:0px 20px;visibility:hidden;}
-h1:hover .anchor-link,h2:hover .anchor-link,h3:hover .anchor-link,h4:hover .anchor-link,h5:hover .anchor-link,h6:hover .anchor-link{visibility:visible;}
-/* end stuff for output/input prompts*/
-
-
-.highlight-ipynb .hll { background-color: #ffffcc }
-.highlight-ipynb  { background: #f8f8f8; }
-.highlight-ipynb .c { color: #408080; font-style: italic } /* Comment */
-.highlight-ipynb .err { border: 1px solid #FF0000 } /* Error */
-.highlight-ipynb .k { color: #008000; font-weight: bold } /* Keyword */
-.highlight-ipynb .o { color: #666666 } /* Operator */
-.highlight-ipynb .cm { color: #408080; font-style: italic } /* Comment.Multiline */
-.highlight-ipynb .cp { color: #BC7A00 } /* Comment.Preproc */
-.highlight-ipynb .c1 { color: #408080; font-style: italic } /* Comment.Single */
-.highlight-ipynb .cs { color: #408080; font-style: italic } /* Comment.Special */
-.highlight-ipynb .gd { color: #A00000 } /* Generic.Deleted */
-.highlight-ipynb .ge { font-style: italic } /* Generic.Emph */
-.highlight-ipynb .gr { color: #FF0000 } /* Generic.Error */
-.highlight-ipynb .gh { color: #000080; font-weight: bold } /* Generic.Heading */
-.highlight-ipynb .gi { color: #00A000 } /* Generic.Inserted */
-.highlight-ipynb .go { color: #888888 } /* Generic.Output */
-.highlight-ipynb .gp { color: #000080; font-weight: bold } /* Generic.Prompt */
-.highlight-ipynb .gs { font-weight: bold } /* Generic.Strong */
-.highlight-ipynb .gu { color: #800080; font-weight: bold } /* Generic.Subheading */
-.highlight-ipynb .gt { color: #0044DD } /* Generic.Traceback */
-.highlight-ipynb .kc { color: #008000; font-weight: bold } /* Keyword.Constant */
-.highlight-ipynb .kd { color: #008000; font-weight: bold } /* Keyword.Declaration */
-.highlight-ipynb .kn { color: #008000; font-weight: bold } /* Keyword.Namespace */
-.highlight-ipynb .kp { color: #008000 } /* Keyword.Pseudo */
-.highlight-ipynb .kr { color: #008000; font-weight: bold } /* Keyword.Reserved */
-.highlight-ipynb .kt { color: #B00040 } /* Keyword.Type */
-.highlight-ipynb .m { color: #666666 } /* Literal.Number */
-.highlight-ipynb .s { color: #BA2121 } /* Literal.String */
-.highlight-ipynb .na { color: #7D9029 } /* Name.Attribute */
-.highlight-ipynb .nb { color: #008000 } /* Name.Builtin */
-.highlight-ipynb .nc { color: #0000FF; font-weight: bold } /* Name.Class */
-.highlight-ipynb .no { color: #880000 } /* Name.Constant */
-.highlight-ipynb .nd { color: #AA22FF } /* Name.Decorator */
-.highlight-ipynb .ni { color: #999999; font-weight: bold } /* Name.Entity */
-.highlight-ipynb .ne { color: #D2413A; font-weight: bold } /* Name.Exception */
-.highlight-ipynb .nf { color: #0000FF } /* Name.Function */
-.highlight-ipynb .nl { color: #A0A000 } /* Name.Label */
-.highlight-ipynb .nn { color: #0000FF; font-weight: bold } /* Name.Namespace */
-.highlight-ipynb .nt { color: #008000; font-weight: bold } /* Name.Tag */
-.highlight-ipynb .nv { color: #19177C } /* Name.Variable */
-.highlight-ipynb .ow { color: #AA22FF; font-weight: bold } /* Operator.Word */
-.highlight-ipynb .w { color: #bbbbbb } /* Text.Whitespace */
-.highlight-ipynb .mf { color: #666666 } /* Literal.Number.Float */
-.highlight-ipynb .mh { color: #666666 } /* Literal.Number.Hex */
-.highlight-ipynb .mi { color: #666666 } /* Literal.Number.Integer */
-.highlight-ipynb .mo { color: #666666 } /* Literal.Number.Oct */
-.highlight-ipynb .sb { color: #BA2121 } /* Literal.String.Backtick */
-.highlight-ipynb .sc { color: #BA2121 } /* Literal.String.Char */
-.highlight-ipynb .sd { color: #BA2121; font-style: italic } /* Literal.String.Doc */
-.highlight-ipynb .s2 { color: #BA2121 } /* Literal.String.Double */
-.highlight-ipynb .se { color: #BB6622; font-weight: bold } /* Literal.String.Escape */
-.highlight-ipynb .sh { color: #BA2121 } /* Literal.String.Heredoc */
-.highlight-ipynb .si { color: #BB6688; font-weight: bold } /* Literal.String.Interpol */
-.highlight-ipynb .sx { color: #008000 } /* Literal.String.Other */
-.highlight-ipynb .sr { color: #BB6688 } /* Literal.String.Regex */
-.highlight-ipynb .s1 { color: #BA2121 } /* Literal.String.Single */
-.highlight-ipynb .ss { color: #19177C } /* Literal.String.Symbol */
-.highlight-ipynb .bp { color: #008000 } /* Name.Builtin.Pseudo */
-.highlight-ipynb .vc { color: #19177C } /* Name.Variable.Class */
-.highlight-ipynb .vg { color: #19177C } /* Name.Variable.Global */
-.highlight-ipynb .vi { color: #19177C } /* Name.Variable.Instance */
-.highlight-ipynb .il { color: #666666 } /* Literal.Number.Integer.Long */
-</style>
-
-<style type="text/css">
-/* Overrides of notebook CSS for static HTML export */
-div.entry-content {
-  overflow: visible;
-  padding: 8px;
-}
-.input_area {
-  padding: 0.2em;
-}
-
-a.heading-anchor {
- white-space: normal;
-}
-
-.rendered_html
-code {
- font-size: .8em;
-}
-
-pre.ipynb {
-  color: black;
-  background: #f7f7f7;
-  border: none;
-  box-shadow: none;
-  margin-bottom: 0;
-  padding: 0;
-  margin: 0px;
-  font-size: 13px;
-}
-
-/* remove the prompt div from text cells */
-div.text_cell .prompt {
-    display: none;
-}
-
-/* remove horizontal padding from text cells, */
-/* so it aligns with outer body text */
-div.text_cell_render {
-    padding: 0.5em 0em;
-}
-
-img.anim_icon{padding:0; border:0; vertical-align:middle; -webkit-box-shadow:none; -box-shadow:none}
-</style>
-
-<script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML" type="text/javascript"></script>
-<script type="text/javascript">
-init_mathjax = function() {
-    if (window.MathJax) {
-        // MathJax loaded
-        MathJax.Hub.Config({
-            tex2jax: {
-                inlineMath: [ ['$','$'], ["\\(","\\)"] ],
-                displayMath: [ ['$$','$$'], ["\\[","\\]"] ]
-            },
-            displayAlign: 'left', // Change this to 'center' to center equations.
-            "HTML-CSS": {
-                styles: {'.MathJax_Display': {"margin": 0}}
-            }
-        });
-        MathJax.Hub.Queue(["Typeset",MathJax.Hub]);
-    }
-}
-init_mathjax();
-</script>
-
-<link rel="canonical" href=".">
-        <meta name="author" content="KMOL" />
-
-    <!-- Open Graph tags -->
-        <meta property="og:site_name" content="2016Fall 計算機程式課程網誌 (虎尾科大MDE)" />
-        <meta property="og:type" content="website"/>
-        <meta property="og:title" content="2016Fall 計算機程式課程網誌 (虎尾科大MDE)"/>
-        <meta property="og:url" content="."/>
-        <meta property="og:description" content="2016Fall 計算機程式課程網誌 (虎尾科大MDE)"/>
-
-
-    <!-- Bootstrap -->
-        <link rel="stylesheet" href="./theme/css/bootstrap.united.min.css" type="text/css"/>
-    <link href="./theme/css/font-awesome.min.css" rel="stylesheet">
-
-    <link href="./theme/css/pygments/monokai.css" rel="stylesheet">
-    <link href="./theme/tipuesearch/tipuesearch.css" rel="stylesheet">
-    <link rel="stylesheet" href="./theme/css/style.css" type="text/css"/>
-
-        <link href="./feeds/all.atom.xml" type="application/atom+xml" rel="alternate"
-              title="2016Fall 計算機程式課程網誌 (虎尾科大MDE) ATOM Feed"/>
-
-<script type="text/javascript" src="https://coursemdetw.github.io/project_site_files/files/syntaxhighlighter/shCore.js"></script>
-<script type="text/javascript" src="https://coursemdetw.github.io/project_site_files/files/syntaxhighlighter/shBrushJScript.js"></script>
-<script type="text/javascript" src="https://coursemdetw.github.io/project_site_files/files/syntaxhighlighter/shBrushJava.js"></script>
-<script type="text/javascript" src="https://coursemdetw.github.io/project_site_files/files/syntaxhighlighter/shBrushPython.js"></script>
-<script type="text/javascript" src="https://coursemdetw.github.io/project_site_files/files/syntaxhighlighter/shBrushSql.js"></script>
-<script type="text/javascript" src="https://coursemdetw.github.io/project_site_files/files/syntaxhighlighter/shBrushXml.js"></script>
-<script type="text/javascript" src="https://coursemdetw.github.io/project_site_files/files/syntaxhighlighter/shBrushPhp.js"></script>
-<script type="text/javascript" src="https://coursemdetw.github.io/project_site_files/files/syntaxhighlighter/shBrushCpp.js"></script>
-<script type="text/javascript" src="https://coursemdetw.github.io/project_site_files/files/syntaxhighlighter/shBrushCss.js"></script>
-<script type="text/javascript" src="https://coursemdetw.github.io/project_site_files/files/syntaxhighlighter/shBrushCSharp.js"></script>
-<script type="text/javascript" src="https://coursemdetw.github.io/project_site_files/files/syntaxhighlighter/shBrushBash.js"></script>
-<script type='text/javascript'>
-	(function(){
-		var corecss = document.createElement('link');
-		var themecss = document.createElement('link');
-		var corecssurl = "https://chiamingyen.github.io/kmolab_data/files/syntaxhighlighter/css/shCore.css";
-		if ( corecss.setAttribute ) {
-				corecss.setAttribute( "rel", "stylesheet" );
-				corecss.setAttribute( "type", "text/css" );
-				corecss.setAttribute( "href", corecssurl );
-		} else {
-				corecss.rel = "stylesheet";
-				corecss.href = corecssurl;
-		}
-		document.getElementsByTagName("head")[0].insertBefore( corecss, document.getElementById("syntaxhighlighteranchor") );
-		var themecssurl = "https://chiamingyen.github.io/kmolab_data/files/syntaxhighlighter/css/shThemeDefault.css?ver=3.0.9b";
-		if ( themecss.setAttribute ) {
-				themecss.setAttribute( "rel", "stylesheet" );
-				themecss.setAttribute( "type", "text/css" );
-				themecss.setAttribute( "href", themecssurl );
-		} else {
-				themecss.rel = "stylesheet";
-				themecss.href = themecssurl;
-		}
-		//document.getElementById("syntaxhighlighteranchor").appendChild(themecss);
-		document.getElementsByTagName("head")[0].insertBefore( themecss, document.getElementById("syntaxhighlighteranchor") );
-	})();
-	SyntaxHighlighter.config.strings.expandSource = '+ expand source';
-	SyntaxHighlighter.config.strings.help = '?';
-	SyntaxHighlighter.config.strings.alert = 'SyntaxHighlighter\n\n';
-	SyntaxHighlighter.config.strings.noBrush = 'Can\'t find brush for: ';
-	SyntaxHighlighter.config.strings.brushNotHtmlScript = 'Brush wasn\'t configured for html-script option: ';
-	SyntaxHighlighter.defaults['pad-line-numbers'] = false;
-	SyntaxHighlighter.defaults['toolbar'] = false;
-	SyntaxHighlighter.all();
-</script>
-
+    <!--[if lt IE 9]>
+    <script src="https://cad-lab.github.io/cadlab_data/reveal/lib/js/html5shiv.js"></script>
+    <![endif]-->
 </head>
+
 <body>
+<div class="reveal">
+<!-- Any section element inside of this container is displayed as a slide -->
+<div class="slides">
+<section data-markdown>
+    <script type="text/template">
+# 2016Fall 計算機程式_侯安調簡報
 
-<div class="navbar navbar-default navbar-fixed-top" role="navigation">
-	<div class="container">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a href="./" class="navbar-brand">
-2016Fall 計算機程式課程網誌 (虎尾科大MDE)            </a>
-        </div>
-        <div class="collapse navbar-collapse navbar-ex1-collapse">
-            <ul class="nav navbar-nav">
-                         <li><a href="./pages/about/">
-                             About
-                          </a></li>
-                        <li >
-                            <a href="./category/course.html">Course</a>
-                        </li>
-            </ul>
-            <ul class="nav navbar-nav navbar-right">
-              <li><span>
-                <form class="navbar-search" action="./search.html">
-                  <input type="text" class="search-query" placeholder="Search" name="q" id="tipue_search_input" required>
-                </form></span>
-              </li>
-              <li><a href="./archives.html"><i class="fa fa-th-list"></i><span class="icon-label">Archives</span></a></li>
-            </ul>
-        </div>
-        <!-- /.navbar-collapse -->
-    </div>
-</div> <!-- /.navbar -->
-<!-- Banner -->
-<!-- End Banner -->
-<div class="container">
-    <div class="row">
-        <div class="col-sm-9">
+### 虎科大機械設計工程系
 
-            <article>
-                <h2><a href="./w14-shang-ke-fan-li.html">W14 上課範例</a></h2>
-                <div class="summary"><p>創造按鈕</p>
+<embed src="https://github.com/s40523120/2016fallcp_hw/KangHui_Sadhotel.mp3" autostart=true hidden=true loop=true>
+<small>
 
-                    <a class="btn btn-default btn-xs" href="./w14-shang-ke-fan-li.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2><a href="./w13-brythonlian-xi.html">W13 Brython練習</a></h2>
-                <div class="summary">
-                    <a class="btn btn-default btn-xs" href="./w13-brythonlian-xi.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2><a href="./w12-brython-ji-ta-he-xian-fan-li.html">W12 Brython 吉他和弦範例</a></h2>
-                <div class="summary"><p>Brython 繪圖和弦</p>
+Created by <a href="https://github.com/s40523120">Hou Andiao</a> / <a href="https://www.facebook.com/profile.php?id=100002576282298">@facebook</a>
+</small>
 
-                    <a class="btn btn-default btn-xs" href="./w12-brython-ji-ta-he-xian-fan-li.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2><a href="./w10-brython-hui-tu-fan-li.html">W10 Brython 繪圖範例</a></h2>
-                <div class="summary"><p>Brython 繪圖</p>
+[blog](blog/index.html)
 
-                    <a class="btn btn-default btn-xs" href="./w10-brython-hui-tu-fan-li.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-
-        </div>
-        <div class="col-sm-3" id="sidebar">
-            <aside>
-
-<section class="well well-sm">
-    <ul class="list-group list-group-flush">
-
-            <li class="list-group-item"><h4><i class="fa fa-home fa-lg"></i><span class="icon-label">Recent Posts</span></h4>
-                <ul class="list-group" id="recentposts">
-                    <li class="list-group-item">
-                        <a href="./w14-shang-ke-fan-li.html">
-                            W14 上課範例
-                        </a>
-                    </li>
-                    <li class="list-group-item">
-                        <a href="./w13-brythonlian-xi.html">
-                            W13 Brython練習
-                        </a>
-                    </li>
-                    <li class="list-group-item">
-                        <a href="./w12-brython-ji-ta-he-xian-fan-li.html">
-                            W12 Brython 吉他和弦範例
-                        </a>
-                    </li>
-                    <li class="list-group-item">
-                        <a href="./w10-brython-hui-tu-fan-li.html">
-                            W10 Brython 繪圖範例
-                        </a>
-                    </li>
-                </ul>
-            </li>
-
-            <li class="list-group-item"><a href="./categories.html"><h4><i class="fa fa-home fa-lg"></i><span class="icon-label">Categories</span></h4></a>
-                <ul class="list-group" id="categories">
-                    <li class="list-group-item">
-                        <a href="./category/course.html">
-                            <i class="fa fa-folder-open fa-lg"></i> Course
-                        </a>
-                    </li>
-                </ul>
-            </li>
-
-            <li class="list-group-item"><a href="./tags.html"><h4><i class="fa fa-tags fa-lg"></i><span class="icon-label">Tags</span></h4></a>
-                <ul class="list-group list-inline tagcloud" id="tags">
-                </ul>
-            </li>
-    <li class="list-group-item"><h4><i class="fa fa-external-link-square fa-lg"></i><span class="icon-label">Links</span></h4>
-      <ul class="list-group" id="links">
-        <li class="list-group-item">
-            <a href="http://getpelican.com/" target="_blank">
-                Pelican
-            </a>
-        </li>
-        <li class="list-group-item">
-            <a href="https://github.com/DandyDev/pelican-bootstrap3/" target="_blank">
-                pelican-bootstrap3
-            </a>
-        </li>
-        <li class="list-group-item">
-            <a href="https://github.com/getpelican/pelican-plugins" target="_blank">
-                pelican-plugins
-            </a>
-        </li>
-        <li class="list-group-item">
-            <a href="https://github.com/Tipue/Tipue-Search" target="_blank">
-                Tipue search
-            </a>
-        </li>
-      </ul>
-    </li>
-    </ul>
+    </script>
 </section>
-            </aside>
-        </div>
-    </div>
+
+
+						
+<section data-markdown>
+    <script type="text/template">
+# 投影片快捷鍵
+
+* 利用箭頭上下前後換頁
+* 按 f 鍵進入全螢幕模式 (full screen)
+* 按 s 鍵可以顯示投影片筆記 (show)
+* 按 o 鍵可以切換單張或全域檢視 (overview)
+* 按 b 或 . 鍵可以切換螢幕黑屏 (black)
+* 按 Esc 可以退出全螢幕或全域檢視 (Escape)
+
+    </script>
+</section>
+
+
+						
+<section>
+<section data-markdown>
+    <script type="text/template">
+	Hou Andiao vimeo 影片
+    
+<section>
+
+<iframe src="https://player.vimeo.com/video/191117720" width="640" height="330" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+<p><a href="https://vimeo.com/191117720">2016-10-21  git clone 視頻</a> from <a href="https://vimeo.com/user57833023">Andiao Hou</a> on <a href="https://vimeo.com">Vimeo</a>.</p>
+
+</section>
+    </script>
+</section>
+
+
+						
+<section data-markdown>
+    <script type="text/template">
+
+
+<section>
+
+<iframe src="https://player.vimeo.com/video/196824603" width="640" height="360" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+<p><a href="https://vimeo.com/196824603">20161221 194121</a> from <a href="https://vimeo.com/user57833023">Andiao Hou</a> on <a href="https://vimeo.com">Vimeo</a>.</p>
+
+</section>
+    </script>
+</section>
+
+
+						
+<section data-markdown>
+    <script type="text/template">
+# 計算機程式系列課程
+
+## 網際內容管理
+## 電腦輔助設計實習
+<span style="color:#00FF80">還有</span>
+## 協同產品設計實習
+也在研習<span style="color:#FFFF00">創造力</span>、<span style="color:#FFFF00">表達力</span>與<span style="color:#FFFF00">協同力</span>
+
+    </script>
+</section>
+
+
+						
+<section data-markdown>
+    <script type="text/template">
+# 何謂創造力?
+
+## 能夠<small><span style="color:#FF0080">持續</span></small><span style="color:#FFFF00">自學</span>
+## 會安排<small><span style="color:#FF0080">高效</span></small><span style="color:#FFFF00">可執行</span>流程
+<span style="color:#00FF80">還有</span>
+## 俱備<small><span style="color:#FF0080">豐富</span></small><span style="color:#FFFF00">想像力</span>
+
+    </script>
+</section>
+
+
+						
+<section data-markdown>
+    <script type="text/template">
+# 何謂創造力?
+
+## 能夠<small><span style="color:#FF0080">持續</span></small>自學-><span style="color:#FFFF00">不一定都要別人教</span>
+## 會安排<small><span style="color:#FF0080">高效</span></small>可執行流程->展現<span style="color:#FFFF00">執行力</span>
+<span style="color:#00FF80">還有</span>
+## 俱備<small><span style="color:#FF0080">豐富</span></small>想像力->不受限, <span style="color:#FFFF00">積極進行改造</span>
+
+    </script>
+</section>
+
+
+						
+<section data-markdown>
+    <script type="text/template">
+# 自學的訓練
+
+## 學員必須自己有學習動機
+## 能消化中英文資料
+## 從中體會學習的意義
+
+
+    </script>
+</section>
+
+
+						
+<section data-markdown>
+    <script type="text/template">
+# 高效執行力
+
+## 用對的方法
+## 在對的時機
+## 找對的人
+## 作對的事
+
+
+    </script>
+</section>
+
+
+						
+</section>
+<section>
+<section data-markdown>
+    <script type="text/template">
+	###歡迎訂閱我的YouTube
+<section>
+<a href="https://www.youtube.com/channel/UCDWXIKObZ4hyw9SmxNIvb_A">YouTube超連結</a>
+</section>
+    </script>
+</section>
+
+
+						
+<section data-markdown>
+    <script type="text/template">
+## 下載 miniconda 可攜環境
+
+  * 在電腦教室下載 [mini2016fall.7z](http://140.130.17.17/public/2016fall/mini2016fall_with_leo.7z)
+  * 從外部下載 [mini2016fall.7z](https://140.130.17.101/download/?filepath=/home/yen/cmsimply/wsgi/local_data/downloads/mini2016fall_with_leo.7z)
+  * start.bat 啟動, stop.bat 關閉
+  * 建議存在隨身硬碟中使用
+
+
+    </script>
+</section>
+
+
+						
+<section data-markdown>
+    <script type="text/template">
+## 學員自評項目
+
+* 上課筆記與心得寫在個人的 2016fallcp_hw 倉儲 Wiki 中
+* 利用 [ShareX](https://getsharex.com/) 錄製上課操作練習影片
+* 將影片加上說明字幕後, 上傳至個人 [Vimeo](https://vimeo.com/) 與 [Youtube](https://www.youtube.com)
+* 每週更新個人與分組的 Github Pages 投影片與網誌
+    </script>
+</section>
+
+
+						
+</section>
+<section>
+<section data-markdown>
+    <script type="text/template">
+# 自學 Python3
+
+[Python3 程式範例](https://github.com/mdecourse/2016fallcp/blob/master/python3program.py)
+### 在哪裡執行?
+### 如何執行?
+### 如何寫心得?
+### 如何錄製操作過程?
+    </script>
+</section>
+
+
+						
+<section data-markdown>
+    <script type="text/template">
+# 在哪裡執行?
+
+### 單機操作系統中 (近端)
+### 單機連結到遠端主機中 (遠端)
+### 瀏覽器中 (網際端)
+    </script>
+</section>
+
+
+						
+<section data-markdown>
+    <script type="text/template">
+# Python 解譯器
+
+CPython: https://www.python.org/
+
+(Anaconda: https://www.continuum.io/downloads)
+    
+IronPython (.NET): http://ironpython.net/
+
+Jython (Java): http://www.jython.org/
+
+Pypy (Python): http://pypy.org/
+
+Brython (Javascript): https://www.brython.info/
+    </script>
+</section>
+
+
+						
+<section data-markdown>
+    <script type="text/template">
+# Python 2 或 3?
+
+### 業界大部份仍以 2.7 版為主
+但是, 若沒有特別約束
+### 建議直接學習 Python3
+    </script>
+</section>
+
+
+						
+</section>
+<section>
+<section data-markdown>
+    <script type="text/template">
+# 計算機程式專題
+
+* 如何進行上課分組與排座位?
+* 如何寫一個猜數字遊戲?
+* 如何繪製 2D 靜態圖?
+* 如何製作一個簡單的網際遊戲?
+    </script>
+</section>
+
+
+						
+<section data-markdown>
+    <script type="text/template">
+# 課程分組排座位
+
+* 想像一下分組流程
+* 請畫出流程圖
+* 如何進行最好?
+    </script>
+</section>
+
+
+						
+<section data-markdown>
+    <script type="text/template">
+# 猜數字遊戲
+
+* 單機執行還是瀏覽器執行?
+* 請畫出流程圖
+* 有沒有參考資料?
+    </script>
+</section>
+
+
+						
+<section data-markdown>
+    <script type="text/template">
+# 2D 繪圖
+
+* 單機執行還是瀏覽器執行?
+* 請畫出流程圖
+* 有沒有參考資料?
+    </script>
+</section>
+
+
+						
+<section data-markdown>
+    <script type="text/template">
+# 網際遊戲
+
+* 單機執行還是瀏覽器執行?
+* 請畫出流程圖
+* 有沒有參考資料?
+    </script>
+</section>
+
+
+						
+</section>
+<section>
+<section data-markdown>
+    <script type="text/template">
+# Github 倉儲網頁
+
+####建立個人 Github 網頁 (帳號.github.io)
+####建立個人課程作業網頁 (納入投影片與網誌架構)
+####組長建立分組的評量網頁 (納入投影片與網誌架構)
+    </script>
+</section>
+
+
+						
+<section data-markdown>
+    <script type="text/template">
+# 學員作業網頁定版
+
+###個人作業網頁內容可以隨時改版
+###分組評量網頁必須在指定時間前定版
+###Github 倉儲 gh-pages分支與子模組應用
+    </script>
+</section>
+
+
+						
+<section data-markdown>
+    <script type="text/template">
+# Github 倉儲拉回請求
+
+####分組倉儲 Collaborators 設定
+####分組倉儲版本 Pull Requests 練習
+####各組員實際操作影片錄製
+####操作影片加字幕以及影片檔相加
+    </script>
+</section>
+
+
+						
+</section>
+<section>
+<section data-markdown>
+    <script type="text/template">
+# Python3 語法
+
+####print()
+####input()
+####變數名稱與關鍵字
+    </script>
+</section>
+
+
+						
+<section data-markdown>
+    <script type="text/template">
+# for 迴圈用法
+
+###Python 程式縮排
+###for i in range(5)：
+###數列與 iterator
+
+    </script>
+</section>
+
+
+						
+<section data-markdown>
+    <script type="text/template">
+# 函式用法
+
+####函式定義
+####函式呼叫與傳值
+####函式載入順序
+    </script>
+</section>
+
+
+						
+<section data-markdown>
+    <script type="text/template">
+# 數列用法
+
+####數列與索引
+####數列與字串
+####數列排序
+    </script>
+</section>
+
+
+						
+<section data-markdown>
+    <script type="text/template">
+# 分組程式內容
+
+####讀取原始資料內容
+####設法分割資料, 納入數列
+####根據設計邏輯進行資料處理
+    </script>
+</section>
+
+
+						
+<section data-markdown>
+    <script type="text/template">
+# 遊戲邏輯
+
+####1-100 中隨機取一個數字作為答案
+####設法讓使用者猜這個數字 (接受輸入)
+####使用每猜一次都回答比答案大或小
+####能在一定次數中猜對者獲勝
+####在單機或網際執行程式?
+    </script>
+</section>
+
+
+						
+<section data-markdown>
+    <script type="text/template">
+# Python 網際繪圖
+
+####Brython 簡介
+####Brython 執行設定
+####基本繪圖練習 (五芒星、正齒輪與各國國旗)
+    </script>
+</section>
+
+
+						
+<section data-markdown>
+    <script type="text/template">
+# 網際動畫範例
+
+####機構模擬
+####猜顏色遊戲
+####網際對戰遊戲
+    </script>
+</section>
+
+
+						
+</section>
+<section>
+<section data-markdown>
+    <script type="text/template">
+<!-- 請注意, @others 不可以內縮 -->
+# 數學符號與方程式
+
+Inline math equations go in like so: $\omega = d\phi / dt$. Display
+math should get its own line and be put in in double-dollarsigns:
+
+$$I = \int \rho R^{2} dV$$
+    </script>
+</section>
+
+
+
+						
+<section data-markdown>
+    <script type="text/template">
+<!-- 請注意, @others 不可以內縮 -->
+## 利用 Markdown 寫投影片
+以下利用 Markdown 格式展示 Python 程式碼:
+```
+# use threading and subprocess to threading the make process
+import os
+import subprocess
+import threading
+
+def domake():
+    
+    path = "../exposed/api/exposed"
+    ubuntu = "../Ubuntu"
+    
+    # create obj path
+    
+    if not os.path.exists(path+"/../obj"):
+        os.makedirs(path+"/../obj")
+    
+    subprocess.call(["make", "clean"], cwd=path)
+    subprocess.call("make", cwd=path)
+    subprocess.call(["cp", "{libslvs.so, _slvs.so, slvs.py}", ubuntu], cwd=path)
+    subprocess.call(["python3", "circle_ex.py"], cwd=path+"/"+ubuntu)
+    
+make = threading.Thread(target=domake)
+make.start()
+```
+    </script>
+</section>
+
+
+
+						
+<section data-markdown>
+    <script type="text/template">
+## 使用 iframe 導入影片
+
+### 導入影片 template
+
+<iframe src="https://player.vimeo.com/video/183950627" width="640" height="492" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+    </script>
+</section>
+
+
+						
+</section>
 </div>
-<footer>
-   <div class="container">
-      <hr>
-      <div class="row">
-         <div class="col-xs-10">&copy; 2016 KMOL
-            &middot; Powered by <a href="https://github.com/DandyDev/pelican-bootstrap3" target="_blank">pelican-bootstrap3</a>,
-            <a href="http://docs.getpelican.com/" target="_blank">Pelican</a>,
-            <a href="http://getbootstrap.com" target="_blank">Bootstrap</a>         </div>
-         <div class="col-xs-2"><p class="pull-right"><i class="fa fa-arrow-up"></i> <a href="#">Back to top</a></p></div>
-      </div>
-   </div>
-</footer>
-<script src="./theme/js/jquery.min.js"></script>
 
-<!-- Include all compiled plugins (below), or include individual files as needed -->
-<script src="./theme/js/bootstrap.min.js"></script>
+</div>
 
-<!-- Enable responsive features in IE8 with Respond.js (https://github.com/scottjehl/Respond) -->
-<script src="./theme/js/respond.min.js"></script>
+<script src="https://cad-lab.github.io/cadlab_data/reveal/lib/js/head.min.js"></script>
+<script src="https://cad-lab.github.io/cadlab_data/reveal/js/reveal.js"></script>
+<script>
+        // More info https://github.com/hakimel/reveal.js#configuration
+        Reveal.initialize({
+            controls: true,
+            progress: true,
+            history: true,
+            center: true,
 
+            transition: 'slide', // none/fade/slide/convex/concave/zoom
 
+            // More info https://github.com/hakimel/reveal.js#dependencies
+            dependencies: [
+                { src: 'https://cad-lab.github.io/cadlab_data/reveal/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+                { src: 'https://cad-lab.github.io/cadlab_data/reveal/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+                { src: 'https://cad-lab.github.io/cadlab_data/reveal/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+                { src: 'https://cad-lab.github.io/cadlab_data/reveal/plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+                { src: 'https://cad-lab.github.io/cadlab_data/reveal/plugin/zoom-js/zoom.js', async: true },
+                { src: 'https://cad-lab.github.io/cadlab_data/reveal/plugin/notes/notes.js', async: true },
+                { src: 'https://cad-lab.github.io/cadlab_data/reveal/plugin/math/math.js', async: true }
+            ]
+        });
+</script>
 </body>
 </html>
+
