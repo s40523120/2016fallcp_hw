@@ -397,6 +397,83 @@ for s in mylist:
     num = num + 1
 
 </script>
+
+<h2>程式資料:</h2>
+<p><pre class="brush: python">
+<canvas id="chord1" width="600" height="400"></canvas>
+<script type="text/python3">
+from browser import document as doc
+import math</p>
+<h1>準備繪圖畫布</h1>
+<p>canvas = doc["chord1"]
+ctx = canvas.getContext("2d")</p>
+<p>def background(x, y, xinc, yinc, xnum, ynum, ctx):
+    # 水平線
+    for i in range(ynum+1):
+        ctx.beginPath()
+    # 設定線的寬度為 1 個單位
+        if i == 0:
+            ctx.lineWidth = 7
+        else:
+            ctx.lineWidth = 1
+        ctx.moveTo(x-1, y+i<em>yinc)
+        ctx.lineTo(x+xnum</em>xinc+1, y+i*yinc)
+        # 設定顏色為藍色, 也可以使用 "rgb(0, 0, 255)" 字串設定顏色值
+        ctx.strokeStyle = "blue"
+        ctx.stroke()
+        ctx.closePath()</p>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11</pre></div></td><td class="code"><div class="codehilite"><pre><span></span># 垂直線
+for i in range(xnum+1):
+    ctx.beginPath()
+# 設定線的寬度為 1 個單位
+    ctx.lineWidth = 1
+    ctx.moveTo(x+i*xinc, y)
+    ctx.lineTo(x+i*xinc, y+ynum*yinc)
+    # 設定顏色為藍色, 也可以使用 &quot;rgb(0, 0, 255)&quot; 字串設定顏色值
+    ctx.strokeStyle = &quot;blue&quot;
+    ctx.stroke()
+    ctx.closePath()
+</pre></div>
+</td></tr></table>
+
+<p>def canvasText(x, y, fontSize, string, sup, sub, color, ctx):
+    # 標定各弦音符號, 以及把位編號
+    ctx.beginPath()
+    ctx.fillStyle = color
+    ctx.strokeStyle = color
+    #ctx.font = "20px Arial"
+    ctx.font = str(fontSize)+ "px Arial"
+    ctx.fillText(string, x, y)
+    ctx.font = str(fontSize-8)+ "px Arial"
+    if sup != "":
+        ctx.fillText(sup, x+fontSize/1.6, y-fontSize/2)
+    if sub != "":
+        ctx.fillText(sup, x+fontSize/1.6, y)
+    ctx.fill()
+    ctx.stroke()
+    ctx.closePath()</p>
+<p>w = 20
+h = 30
+background(100, 100, w, h, 5, 5, ctx)
+mylist = ["E","A","D","G","B","E"]
+num = 0
+for s in mylist:
+    #canvasText(100,  80, 20, "A", "b", "", "black", ctx)
+    canvasText(100+num*w,  80, 20, s, "", "", "black", ctx)
+    num = num + 1</p>
+</script>
+
+</pre>
             </div>
             <!-- /.entry-content -->
         </article>
@@ -411,6 +488,11 @@ for s in mylist:
 
             <li class="list-group-item"><h4><i class="fa fa-home fa-lg"></i><span class="icon-label">Recent Posts</span></h4>
                 <ul class="list-group" id="recentposts">
+                    <li class="list-group-item">
+                        <a href="./qi-mo-xin-de-pian-you-guan-yu-gitde-cloneyu-push.html">
+                            期末心得篇(有關於git的Clone與push)
+                        </a>
+                    </li>
                     <li class="list-group-item">
                         <a href="./w17-hui-zhuan-dong-de-xian.html">
                             W17  會轉動的線
@@ -429,11 +511,6 @@ for s in mylist:
                     <li class="list-group-item">
                         <a href="./w13-brythonlian-xi.html">
                             W13 Brython練習
-                        </a>
-                    </li>
-                    <li class="list-group-item">
-                        <a href="./w12-brython-ji-ta-he-xian-fan-li.html">
-                            W12 Brython 吉他和弦範例
                         </a>
                     </li>
                 </ul>
